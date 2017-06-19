@@ -6,13 +6,18 @@ Rails.application.routes.draw do
     path_names: {
       sign_in: 'login',
       sign_out: 'logout',
+
+      registration: 'a',
       sign_up: 'register',
-      edit: 'profile'
     }
   )
 
-  get 'dashboard', to: 'dashboard#index'
 
+  namespace :api, defaults: {format: :json} do
+    resources :users, only: [:index, :show]
+  end
+
+  get 'dashboard', to: 'dashboard#index'
   root 'home#index'
 
 end
