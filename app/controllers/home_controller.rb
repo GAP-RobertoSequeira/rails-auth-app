@@ -1,4 +1,8 @@
 class HomeController < ApplicationController
-  def index
-  end
+
+  before_action :authenticate_user!, only: [:jwt]
+
+  def index; end
+
+  def jtw; end
 end

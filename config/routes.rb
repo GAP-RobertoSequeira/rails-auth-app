@@ -12,12 +12,13 @@ Rails.application.routes.draw do
     }
   )
 
-
   namespace :api, defaults: {format: :json} do
+    post 'login', to: 'sessions#create'
     resources :users, only: [:index, :show]
   end
 
   get 'dashboard', to: 'dashboard#index'
+  get 'jwt', to: 'home#jwt'
   root 'home#index'
 
 end

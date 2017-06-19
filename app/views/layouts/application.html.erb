@@ -30,6 +30,9 @@
           <li class="<%= active_class(dashboard_path) %>">
             <%= link_to 'Dashboard', dashboard_path %>
           </li>
+          <li class="<%= active_class(jwt_path) %>">
+            <%= link_to 'JWT Token', jwt_path %>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
