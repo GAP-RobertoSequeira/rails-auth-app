@@ -1,0 +1,14 @@
+default: &default
+  host: localhost:3000
+  protocol: http
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  host: <%= ENV['EXTERNAL_HOST'] %>
+  protocol: <%= ENV['EXTERNAL_HOST_PROTOCOL'] %>

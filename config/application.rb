@@ -14,5 +14,8 @@ module RailsAuthApp
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    routes.default_url_options = config_for(:serializers).symbolize_keys
+
   end
 end
