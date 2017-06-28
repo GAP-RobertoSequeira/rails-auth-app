@@ -17,3 +17,16 @@
 div.field, div.actions {
   margin-bottom: 10px;
 }
+
+h2 {
+  margin: 20px 0;
+}
+
+th.actions, td.actions {
+  text-align: center;
+  width: 250px;
+}
+
+.list-unstyled {
+  padding-left: 15px;
+}

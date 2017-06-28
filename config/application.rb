@@ -17,5 +17,7 @@ module RailsAuthApp
 
     routes.default_url_options = config_for(:serializers).symbolize_keys
 
+    config.time_zone = 'Central America'
+
   end
 end

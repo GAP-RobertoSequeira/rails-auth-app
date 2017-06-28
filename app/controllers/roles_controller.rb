@@ -3,18 +3,16 @@ class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   def index
-    @roles = Role.all
+    @roles = @app.roles
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @role = Role.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @role = Role.new(role_params)

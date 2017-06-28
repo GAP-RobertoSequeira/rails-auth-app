@@ -1,2 +1,20 @@
-<h1>Dashboard <small>Restricted access</small></h1>
+<div class="page-header">
+  <h1>Users</h1>
+</div>
 
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Registered</th>
+      <th class="actions">Actions</th>
+    </tr>
+  </thead>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= l user.created_at %></td>
+        <td class="actions"><%= link_to 'Manage Roles', user_roles_path(user), class: 'btn btn-primary' %></td>
+      </tr>
+  <% end %>
+</table>

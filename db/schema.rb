@@ -10,19 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623143659) do
+ActiveRecord::Schema.define(version: 20170628143541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
 
   create_table "apps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id"
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_apps_on_user_id"
   end
 
   create_table "apps_users", id: false, force: :cascade do |t|
@@ -30,6 +28,21 @@ ActiveRecord::Schema.define(version: 20170623143659) do
     t.uuid "user_id", null: false
     t.index ["app_id", "user_id"], name: "index_apps_users_on_app_id_and_user_id"
     t.index ["user_id", "app_id"], name: "index_apps_users_on_user_id_and_app_id"
+  end
+
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "app_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_roles_on_app_id"
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "role_id", null: false
+    t.index ["role_id", "user_id"], name: "index_roles_users_on_role_id_and_user_id"
+    t.index ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -45,11 +58,8 @@ ActiveRecord::Schema.define(version: 20170623143659) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "app_id"
-    t.index ["app_id"], name: "index_users_on_app_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "users", "apps"
 end

@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>Role management</h1>
+</div>
+
+<div class="well">
+  <p><strong>User: </strong> <%= @user.email %></p>
+</div>
+
+<h2>Apps</h2>
+
+<%= form_for(:user) do |form| %>
+  <%= hidden_field_tag('user[app_ids][]','') -%>
+
+  <div class="row">
+    <% @apps.each do |app| %>
+
+      <div class="col-xs-6 col-sm-3">
+        <h3>
+          <%= check_box_tag('user[app_ids][]', app.id, @user.app_ids.include?(app.id), id: "user_app_ids_#{app.id}") %>
+          <%= label_tag("user_app_ids_#{app.id}", app.name)%>
+        </h3>
+
+        <ul class="list-unstyled">
+          <%= form.collection_check_boxes(:role_ids, app.roles, :id, :name) do |b| %>
+              <% raw "<li>#{ b.check_box + '&nbsp;'.html_safe + b.label }</li>" %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <br>
+  <div class="form-group">
+    <%= form.submit 'Save' %>
+  </div>
+<% end %>
+
+<br>
+
+<%= link_to 'Back', dashboard_path %>
+
+
+
